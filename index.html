@@ -38,7 +38,7 @@
             border-radius: 2px;
         }
 
-        /* Responsive Hero Image Placeholder */
+        /* Responsive Hero Image Placeholder (Not used anymore, but kept for context) */
         .hero-placeholder {
             min-height: 300px;
             background: linear-gradient(135deg, #0A2342 0%, #15456A 100%);
@@ -69,6 +69,22 @@
             border-top: 1px solid rgba(0, 180, 216, 0.2);
             padding-top: 1.5rem;
             margin-top: auto; /* Ensures footer stays at the bottom */
+        }
+        
+        /* Carousel specific style for fade effect */
+        .carousel-slide {
+            transition: opacity 0.7s ease-in-out;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .carousel-slide.active-slide {
+            opacity: 1;
+            position: relative; /* Set active slide relative for layout */
+            display: block;
         }
 
     </style>
@@ -108,11 +124,16 @@
                     <p class="text-sm text-gray-500 mt-4">Available now for Android.</p>
                 </div>
 
-                <!-- Visual Element (Placeholder) -->
-                <div class="hero-placeholder animate-fadeInRight">
-                    <p class="text-4xl font-bold text-gray-300 opacity-70">
-                        [App Screenshot Carousel Placeholder]
-                    </p>
+                <!-- App Screenshot Carousel -->
+                <div class="relative w-full max-w-lg mx-auto lg:max-w-none animate-fadeInRight bg-[#14375A] p-4 rounded-xl shadow-2xl border-4 border-[#00B4D8] overflow-hidden">
+                    <div id="screenshot-carousel" class="h-96 relative">
+                        <!-- Slides worden hier geladen door JS -->
+                    </div>
+                    
+                    <!-- Nav Dots -->
+                    <div class="text-center pt-4" id="carousel-dots">
+                        <!-- Dots worden hier geladen door JS -->
+                    </div>
                 </div>
             </div>
             
@@ -264,7 +285,7 @@
                 <p>The app does use third-party services that may collect information used to identify you:</p>
                 <ul>
                     <li><a href="https://policies.google.com/privacy" target="_blank">Google Play Services</a></li>
-                    <li><a href="https://support.google.com/admob/answer/6128543?hl=af" target="_blank">AdMob (Advertising)</a></li>
+                    <li><a href="https://support.google.com/admob/answer/6128543?hl=nl" target="_blank">AdMob (Advertising)</a></li>
                 </ul>
 
                 <h3>Log Data</h3>
@@ -287,6 +308,109 @@
             window.scrollTo(0, 0); // Scroll to top
         }
         
+        // --- CAROUSEL LOGIC ---
+        let slideIndex = 0;
+        // Bijgewerkte lijst van slides: 1.png tot en met 11.png
+        const slidesData = [
+            { src: "img/1.png", alt: "GymOps Screenshot 1: Plan Builder" },
+            { src: "img/2.png", alt: "GymOps Screenshot 2: Logging Screen" },
+            { src: "img/3.png", alt: "GymOps Screenshot 3: Analytics View" },
+            { src: "img/4.png", alt: "GymOps Screenshot 4" },
+            { src: "img/5.png", alt: "GymOps Screenshot 5" },
+            { src: "img/6.png", alt: "GymOps Screenshot 6" },
+            { src: "img/7.png", alt: "GymOps Screenshot 7" },
+            { src: "img/8.png", alt: "GymOps Screenshot 8" },
+            { src: "img/9.png", alt: "GymOps Screenshot 9" },
+            { src: "img/10.png", alt: "GymOps Screenshot 10" },
+            { src: "img/11.png", alt: "GymOps Screenshot 11" }
+        ];
+
+        function initializeCarousel() {
+            const carousel = document.getElementById('screenshot-carousel');
+            const dotsContainer = document.getElementById('carousel-dots');
+            
+            if (!carousel || !dotsContainer) return;
+
+            // Clear previous content
+            carousel.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            slidesData.forEach((data, index) => {
+                // Create Slide container
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide p-2';
+                slide.setAttribute('data-index', index);
+
+                // Create Image
+                const img = document.createElement('img');
+                img.src = data.src;
+                img.alt = data.alt;
+                img.className = 'w-full h-full object-contain rounded-lg shadow-xl';
+                
+                slide.appendChild(img);
+                carousel.appendChild(slide);
+
+                // Create Dot
+                const dot = document.createElement('span');
+                dot.className = 'inline-block h-3 w-3 mx-1 bg-gray-500 rounded-full cursor-pointer hover:bg-[#00B4D8] transition duration-300';
+                dot.setAttribute('onclick', `currentSlide(${index})`);
+                dotsContainer.appendChild(dot);
+            });
+
+            // Start showing slides from the beginning
+            showSlides(slideIndex);
+        }
+
+        function showSlides(n) {
+            let i;
+            // Select slides within the carousel container
+            const carousel = document.getElementById('screenshot-carousel');
+            if (!carousel) return;
+            const slides = carousel.children;
+            const dots = document.getElementById('carousel-dots').children;
+            
+            if (slides.length === 0) return;
+
+            // Handle wrap around
+            if (n >= slides.length) { slideIndex = 0 }    
+            if (n < 0) { slideIndex = slides.length - 1 }
+
+            // Hide all slides and deactivate dots
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                slides[i].classList.remove('active-slide');
+                dots[i].classList.remove('bg-[#00B4D8]');
+                dots[i].classList.add('bg-gray-500');
+            }
+
+            // Show current slide and activate dot
+            slides[slideIndex].style.display = "block";
+            slides[slideIndex].classList.add('active-slide');
+            
+            dots[slideIndex].classList.remove('bg-gray-500');
+            dots[slideIndex].classList.add('bg-[#00B4D8]');
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlides(slideIndex);
+        }
+
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides(slideIndex);
+        }
+
+        // Auto advance functionality (only starts if the carousel is initialized)
+        let carouselInterval = null;
+        function startAutoAdvance() {
+            if (carouselInterval) clearInterval(carouselInterval);
+            carouselInterval = setInterval(() => {
+                plusSlides(1);
+            }, 5000); // Change image every 5 seconds
+        }
+
+
         // Initial load check
         document.addEventListener('DOMContentLoaded', () => {
             const hash = window.location.hash.replace('#', '');
@@ -295,6 +419,10 @@
             } else {
                 navigate('home');
             }
+            
+            // Initialize and start the carousel
+            initializeCarousel();
+            startAutoAdvance();
         });
         
         // Listen to hash changes in the URL (when clicking back/forward)
