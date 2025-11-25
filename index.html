@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymOps | TheNorthSeaCodeLab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom colors matching NorthSeaCode (Deep Ocean & Aqua) */
+        .color-deep-ocean { background-color: #0A2342; }
+        .color-deep-ocean-text { color: #0A2342; }
+        .color-aqua { background-color: #00B4D8; }
+        .color-aqua-text { color: #00B4D8; }
+        
+        /* Default body for the dark mode look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D2D50; /* Slightly lighter than Deep Ocean */
+            color: #E0F2F7; /* Light blue/white for text */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* For routing */
+        .page-content { display: none; }
+        .page-content.active { display: block; }
+
+        /* Section style */
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            margin-top: 8px;
+            background-color: #00B4D8;
+            border-radius: 2px;
+        }
+
+        /* Responsive Hero Image Placeholder */
+        .hero-placeholder {
+            min-height: 300px;
+            background: linear-gradient(135deg, #0A2342 0%, #15456A 100%);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #00B4D8;
+        }
+
+        /* Privacy Policy styling */
+        #policy-page {
+            max-width: 900px;
+            margin: auto;
+            background-color: #14375A;
+            padding: 2rem;
+            border-radius: 1rem;
+            line-height: 1.8;
+        }
+        #policy-page h2 { font-size: 1.5rem; margin-top: 1.5rem; color: #00B4D8; }
+        #policy-page h3 { font-size: 1.25rem; margin-top: 1rem; }
+        #policy-page p, #policy-page li { margin-bottom: 0.5rem; }
+        #policy-page ul { list-style: disc; margin-left: 1.5rem; }
+
+        /* Footer styling */
+        footer {
+            border-top: 1px solid rgba(0, 180, 216, 0.2);
+            padding-top: 1.5rem;
+            margin-top: auto; /* Ensures footer stays at the bottom */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="color-deep-ocean shadow-lg sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#home" onclick="navigate('home')" class="text-2xl font-extrabold color-aqua-text">
+                GymOps <span class="text-lg font-light text-gray-400">by TheNorthSeaCodeLab</span>
+            </a>
+            <div class="flex space-x-6 text-sm font-semibold">
+                <a href="#home" onclick="navigate('home')" class="text-white hover:color-aqua-text transition duration-200">Home</a>
+                <a href="#apps" onclick="navigate('apps')" class="text-white hover:color-aqua-text transition duration-200">App(s)</a>
+                <a href="#about" onclick="navigate('about')" class="text-white hover:color-aqua-text transition duration-200">About</a>
+                <a href="#policy" onclick="navigate('policy')" class="text-white hover:color-aqua-text transition duration-200">Privacy Policy</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow">
+        <!-- HOME SECTION -->
+        <section id="home-page" class="page-content active py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Block -->
+                <div class="animate-fadeInLeft">
+                    <h1 class="text-5xl lg:text-7xl font-extrabold mb-4 leading-tight">
+                        Forge Your <span class="color-aqua-text">Strength</span>. <br class="hidden lg:inline"> Architect Your Fitness.
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8">
+                        GymOps is your ultimate planner and tracker, built on precision and data. Stop guessing, start planning.
+                    </p>
+                    <a href="#apps" onclick="navigate('apps')" class="inline-block px-8 py-4 text-lg font-bold text-white color-aqua rounded-xl shadow-xl hover:bg-[#009fb7] transition duration-300">
+                        Discover GymOps
+                    </a>
+                    <p class="text-sm text-gray-500 mt-4">Available now for Android.</p>
+                </div>
+
+                <!-- Visual Element (Placeholder) -->
+                <div class="hero-placeholder animate-fadeInRight">
+                    <p class="text-4xl font-bold text-gray-300 opacity-70">
+                        [App Screenshot Carousel Placeholder]
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Features Overview -->
+            <div class="mt-20 pt-10 border-t border-gray-700">
+                <h2 class="section-header text-3xl font-bold mb-10">Core Functionality</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-6 color-deep-ocean rounded-xl shadow-2xl transition duration-300 hover:scale-[1.02]">
+                        <svg class="w-10 h-10 color-aqua-text mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l2-2 2 2v13M9 19h5m-5 0h-2m7-10h2m-2 0h-2M9 14h6m-3-4h.01M9 8h.01"></path></svg>
+                        <h3 class="text-xl font-bold mb-2 text-white">Intelligent Plan Builder</h3>
+                        <p class="text-gray-400">Design complete, multi-day training plans, not just single workouts. Your roadmap to results.</p>
+                    </div>
+                    <div class="p-6 color-deep-ocean rounded-xl shadow-2xl transition duration-300 hover:scale-[1.02]">
+                        <svg class="w-10 h-10 color-aqua-text mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        <h3 class="text-xl font-bold mb-2 text-white">Advanced Analytics</h3>
+                        <p class="text-gray-400">Visualize total volume, rep counts, and PRs. Make data-driven decisions to crush your goals.</p>
+                    </div>
+                    <div class="p-6 color-deep-ocean rounded-xl shadow-2xl transition duration-300 hover:scale-[1.02]">
+                        <svg class="w-10 h-10 color-aqua-text mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h3 class="text-xl font-bold mb-2 text-white">Automated Efficiency</h3>
+                        <p class="text-gray-400">Seamless logging with automatic rest timer to keep you in the zone and optimize workouts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APPS SECTION -->
+        <section id="apps-page" class="page-content py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-header text-4xl font-extrabold mb-10">Our Apps</h2>
+            <div class="bg-[#14375A] p-8 rounded-xl shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-2">
+                        <h3 class="text-3xl font-bold color-aqua-text mb-3">GymOps: Fitness Architect</h3>
+                        <p class="text-gray-300 mb-6">
+                            The first app from TheNorthSeaCodeLab. A powerful tool for anyone wanting to build their fitness journey from the ground up, focusing on planning, data, and consistency. Suitable for both strength and cardio training.
+                        </p>
+                        <ul class="list-disc list-inside text-gray-400 mb-6 text-sm">
+                            <li>Category: Health & Fitness</li>
+                            <li>Platform: Android (iOS coming soon)</li>
+                            <li>Monetization: Free with ads (AdMob) and optional 'Remove Ads' in-app purchase.</li>
+                        </ul>
+                        <a href="[LINK TO GOOGLE PLAYSTORE]" target="_blank" class="inline-block px-6 py-3 font-semibold text-white color-aqua rounded-lg hover:bg-[#009fb7] transition duration-300">
+                            Download Now on the Play Store
+                        </a>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/150x150/00B4D8/0A2342?text=GymOps+Icon" alt="GymOps Icon" class="rounded-3xl shadow-lg border-4 border-[#00B4D8]">
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-gray-700">
+                    <h4 class="text-2xl font-semibold text-white mb-2">Future Projects</h4>
+                    <p class="text-gray-400">TheNorthSeaCodeLab is working on a range of niche apps focused on precision and efficiency. Stay tuned!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about-page" class="page-content py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-header text-4xl font-extrabold mb-10">About TheNorthSeaCodeLab</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 bg-[#14375A] p-8 rounded-xl shadow-2xl">
+                <div>
+                    <h3 class="text-2xl font-bold color-aqua-text mb-4">Our Philosophy</h3>
+                    <p class="text-gray-300 mb-4">
+                        TheNorthSeaCodeLab stands for robust software, built with Dutch pragmatism and precision. We believe the best apps aren't packed with unnecessary features, but are functional, fast, and reliable. We build tools that get the job done, so you can focus on your goals, whether that's a fitness journey or another personal challenge.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        Our goal is to deliver technology that is as stable and powerful as the North Sea.
+                    </p>
+                    <h3 class="text-2xl font-bold color-aqua-text mb-4">Contact</h3>
+                    <p class="text-gray-300">
+                        Questions, feedback, or collaboration? We'd love to hear from you.
+                    </p>
+                    <p class="text-gray-200 font-semibold mt-2">
+                        Email: thenorthseacodelab@gmail.com
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold color-aqua-text mb-4">Our Values</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <span class="mr-3 color-aqua-text font-extrabold text-xl">✓</span>
+                            <div>**Precision:** Every detail counts. Data must be accurate.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 color-aqua-text font-extrabold text-xl">✓</span>
+                            <div>**Pragmatism:** No frills, focus on functionality.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 color-aqua-text font-extrabold text-xl">✓</span>
+                            <div>**Durability:** Robust code built to last.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIVACY POLICY SECTION (Essential for Google Play) -->
+        <section id="policy-page" class="page-content py-16 px-4 sm:px-6 lg:px-8">
+            <h2 class="section-header text-4xl font-extrabold mb-10 text-center">Privacy Policy - GymOps</h2>
+            <div id="policy-content">
+                <!-- The Privacy Policy text will be loaded here via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="color-deep-ocean mt-10 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            &copy; 2025 TheNorthSeaCodeLab. All rights reserved. | 
+            <a href="#policy" onclick="navigate('policy')" class="hover:text-white">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script>
+        // CLIENT-SIDE ROUTING LOGIC
+        function navigate(pageId) {
+            // Hide all sections
+            document.querySelectorAll('.page-content').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the requested section
+            const targetSection = document.getElementById(`${pageId}-page`);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Load the Privacy Policy separately
+            if (pageId === 'policy') {
+                loadPrivacyPolicyContent();
+            }
+        }
+
+        // Loads the Privacy Policy text (Translated to English)
+        function loadPrivacyPolicyContent() {
+            const policyHtml = document.getElementById('policy-content');
+            const text = `
+                <h2>GymOps Privacy Policy</h2>
+                <p>Last updated: November 25, 2025</p>
+
+                <p>TheNorthSeaCodeLab built the GymOps application as a free, Ad-Supported app. This SERVICE is provided by TheNorthSeaCodeLab at no cost and is intended for use as is.</p>
+
+                <p>This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service. If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.</p>
+
+                <h3>Information Collection and Use</h3>
+                <p>For a better experience, while using our Service, we may require you to provide us with certain personally identifiable information, including but not limited to your unique device ID and fitness data (such as weights and reps). The information that we request will be retained by us and used as described in this privacy policy.</p>
+
+                <p>The app does use third-party services that may collect information used to identify you:</p>
+                <ul>
+                    <li><a href="https://policies.google.com/privacy" target="_blank">Google Play Services</a></li>
+                    <li><a href="https://support.google.com/admob/answer/6128543?hl=af" target="_blank">AdMob (Advertising)</a></li>
+                </ul>
+
+                <h3>Log Data</h3>
+                <p>We want to inform you that whenever you use our Service, in a case of an error in the app, we collect data and information (through third-party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics.</p>
+
+                <h3>Advertising (AdMob)</h3>
+                <p>We use AdMob to display advertisements in the app. AdMob may collect your device identifier, location, and usage patterns to deliver personalized ads. By using the Service, you consent to AdMob's use of cookies and technologies for this purpose. If you wish to remove ads, we offer an In-App Purchase ('Remove Ads').</p>
+
+                <h3>Security</h3>
+                <p>We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
+
+                <h3>Changes to This Privacy Policy</h3>
+                <p>We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.</p>
+
+                <h3>Contact Us</h3>
+                <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at:</p>
+                <p class="font-semibold">Email: thenorthseacodelab@gmail.com</p>
+            `;
+            policyHtml.innerHTML = text;
+            window.scrollTo(0, 0); // Scroll to top
+        }
+        
+        // Initial load check
+        document.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                navigate(hash);
+            } else {
+                navigate('home');
+            }
+        });
+        
+        // Listen to hash changes in the URL (when clicking back/forward)
+        window.onhashchange = () => {
+             const hash = window.location.hash.replace('#', '');
+             if (hash) {
+                 navigate(hash);
+             }
+        };
+
+        // Ensure navigation also updates the URL hash
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href').replace('#', '');
+                if (targetId) {
+                    window.history.pushState(null, null, `#${targetId}`);
+                } else {
+                     window.history.pushState(null, null, `/`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
